@@ -1,20 +1,26 @@
 import React, { memo, useEffect, useState } from 'react';
 import { TextField, Select, MenuItem, Button, Container, Grid } from '@mui/material';
 
-const SearchBar = ({ onSearch, source }) => {
+const SearchBar = ({ onSearch, preferences, authors, setAuthorSelect}) => {
     const [keyword, setKeyword] = useState('');
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
 
     const handleSearch = () => {
         onSearch({ keyword, category, date });
+        setCategory("");
     };
 
+    const handleAuthorsSelect = (value)=>{
+        setCategory(value);
+        setAuthorSelect(value);
+    }
+
     useEffect(()=>{
-        if(source === "NEWS API"){
+        // if(preferences?.source === "NEWS API"){
             setCategory("");
-        }
-    }, [source])
+        // }
+    }, [preferences])
 
     return (
         <Container
@@ -33,15 +39,18 @@ const SearchBar = ({ onSearch, source }) => {
             {/* Category Select */}
             <Select
                 value={category}
-                disabled = {source === "NEWS API"}
-                onChange={(e) => setCategory(e.target.value)}
+                disabled = {preferences?.source !== "NEWS API"}
+                onChange={(e) => handleAuthorsSelect(e.target.value)}
                 displayEmpty
                 fullWidth
-                sx={{ flex: { md: 1 }, minWidth: '180px' }} // Flex for laptops, fixed width for mobile
+                sx={{ flex: { md: 1 }, minWidth: '180px' }} 
             >
                 <MenuItem value="">All Authors</MenuItem>
-                <MenuItem value="sports">Sports</MenuItem>
-                <MenuItem value="technology">Technology</MenuItem>
+                {authors?.map((name)=>(
+                    <MenuItem value={name}>{name}</MenuItem>
+                ))}
+                {/* <MenuItem value="sports">Sports</MenuItem> */}
+                {/* <MenuItem value="technology">Technology</MenuItem> */}
             </Select>
 
             {/* Date Picker */}

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Typography } from '@mui/material';
 import ArticleCard from './ArticleCard';
 
 const ArticleList = ({ articles }) => {
+  useEffect(()=>{
+
+  },[articles]);
+  
   if (!articles?.length) {
     return (
       <Typography variant="h6" color="text.secondary" sx={{ marginTop: 2, marginLeft: "2rem", marginBottom: "2rem" }}>

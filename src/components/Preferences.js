@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   FormControl,
@@ -10,12 +10,14 @@ import {
   ListItemText,
   Checkbox,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-const Preferences = ({ onSavePreferences }) => {
+const Preferences = ({ onSavePreferences}) => {
+  const navigate = useNavigate();
   const [selectedSource, setSelectedSource] = useState('NEWS API');
   const [category, setCategory] = useState("none");
   const [disablePreference, setDisablePreference] = useState(true);
-  const sources = ['NEWS API', 'BBC News', 'The Guardian'];
+  const sources = ['NEWS API', 'The Guardian', 'BBC News' ];
   const categoryOptions = [ "none","business", "entertainment", "general", "health", "science", "sports", "technology",];
 
   const handleSave = () => {
@@ -25,6 +27,9 @@ const Preferences = ({ onSavePreferences }) => {
     };
     onSavePreferences(preferences);
     setDisablePreference(true);
+    if(selectedSource === "BBC News"){
+      navigate("/notes");
+    }
   };
 
   const handleSourceChange = (value) => {
@@ -67,7 +72,7 @@ const Preferences = ({ onSavePreferences }) => {
         >
           {categoryOptions.map((categories) => (
             <MenuItem key={categories} value={categories}>
-              <Checkbox checked={category.includes(categories)} />
+              <Checkbox checked={category?.includes(categories)} />
               <ListItemText primary={categories.charAt(0).toUpperCase() + categories.slice(1)} />
             </MenuItem>
           ))}
