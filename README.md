@@ -8,6 +8,8 @@ And then navigate to project root.
 
 ## Local Setup 
 Use Node Version : 22
+
+
 In project root terminal, run the below commands
 ### `npm i`
 ### `npm run start`
