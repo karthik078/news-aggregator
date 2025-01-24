@@ -6,7 +6,7 @@ Clone this repository.
 And then navigate to project root.
 ### `cd news-aggregator`
 
-## Local Setup 
+## Local Setup (If you want to run locally)
 Use Node Version : 22
 
 
