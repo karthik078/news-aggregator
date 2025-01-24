@@ -2,7 +2,7 @@
 services:
   news-app:
     build:
-      context: news-app
+      context: .
       dockerfile: Dockerfile
     expose:
       - 8080
